@@ -2,10 +2,10 @@
 from langchain_core.prompts import ChatPromptTemplate
 from openai import OpenAI
 
-from vars import API_KEY
+from vars import API_KEY, ORGANIZATION_ID
 
 client = OpenAI(
-    organization='org-pYdGzOPN43a6LFq9DaFwD8Dp',
+    organization=ORGANIZATION_ID,
     api_key=API_KEY
 )
 

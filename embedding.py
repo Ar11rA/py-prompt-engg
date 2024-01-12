@@ -1,12 +1,12 @@
 import numpy as np
 import tiktoken
+
 from openai import OpenAI
 from sklearn.metrics.pairwise import cosine_similarity
-
-from vars import API_KEY
+from vars import API_KEY, ORGANIZATION_ID
 
 client = OpenAI(
-    organization='org-pYdGzOPN43a6LFq9DaFwD8Dp',
+    organization=ORGANIZATION_ID,
     api_key=API_KEY
 )
 
