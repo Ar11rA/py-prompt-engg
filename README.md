@@ -31,5 +31,7 @@ Azure:
 
 On prem
 
-1. ArgoWF/Temporal
+1. ArgoWF/Temporal/K8s
 2. ChromaDB/Pinecone/Elasticsearch
+
+## Resources
