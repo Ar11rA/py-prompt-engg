@@ -63,20 +63,23 @@ def get_current_temperature(latitude: float, longitude: float) -> Dict:
 # just tool to function
 model = ChatOpenAI(temperature=0).bind(
     functions=[format_tool_to_openai_function(get_current_temperature)],
-    function_call={"name": "get_current_temperature"}
 )
+
+print('*********', model.invoke("What is temperature of Delhi?"))
+print('**********', model.invoke("Hi!"))
+
 prompt = ChatPromptTemplate.from_messages([
-    ("system", """
-                You are helpful but sassy assistant
-                You are an expert in world geography
-                Use the tools only when the problem matches the tool description
-               """),
+    ("system", "You are helpful but sassy assistant"),
     ("user", "{input}"),
     MessagesPlaceholder(variable_name="agent_scratchpad"),
     MessagesPlaceholder(variable_name="chat_history"),
 ])
 
 chain = prompt | model | OpenAIFunctionsAgentOutputParser()
+
+print(chain.invoke({"input": "What is temperature of Delhi?", "agent_scratchpad": [], "chat_history": []}))
+print(chain.invoke({"input": "Hi!", "agent_scratchpad": [], "chat_history": []}))
+
 tools = [get_current_temperature]
 agent_chain = RunnablePassthrough.assign(
     agent_scratchpad=lambda x: format_to_openai_functions(x["intermediate_steps"])
@@ -86,8 +89,5 @@ agent_executor = AgentExecutor(agent=agent_chain, tools=tools, verbose=True, mem
 print(agent_executor.invoke({"input": "What is temperature of Bangalore?"}))
 print(agent_executor.invoke({"input": "What is temperature of Moscow?"}))
 print(agent_executor.invoke({"input": "What is latitude and longitude of Moscow?"}))
-
-# TODO: needs fixes
 print(agent_executor.invoke({"input": "Hi, I am Aritra"}))
 print(agent_executor.invoke({"input": "Hi, Who am I?"}))
-print(agent_executor.invoke({"input": "Can you tell who you are speaking with?"}))
