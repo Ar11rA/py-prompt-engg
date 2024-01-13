@@ -3,17 +3,17 @@ from typing import Dict
 
 import openai
 import requests
+from langchain.agents import AgentExecutor
 from langchain.agents import tool
 from langchain.agents.format_scratchpad import format_to_openai_functions
 from langchain.agents.output_parsers import OpenAIFunctionsAgentOutputParser
-from langchain.memory import ConversationBufferMemory
+from langchain.memory import PostgresChatMessageHistory, ConversationBufferMemory
 from langchain.prompts import ChatPromptTemplate
 from langchain.prompts import MessagesPlaceholder
 from langchain.schema.runnable import RunnablePassthrough
 from langchain.tools.render import format_tool_to_openai_function
 from langchain_openai import ChatOpenAI
 from pydantic import BaseModel, Field
-from langchain.agents import AgentExecutor
 
 from vars import API_KEY
 
@@ -84,10 +84,29 @@ tools = [get_current_temperature]
 agent_chain = RunnablePassthrough.assign(
     agent_scratchpad=lambda x: format_to_openai_functions(x["intermediate_steps"])
 ) | chain
+
+pg_connection_string = "postgresql://postgres:mysecretpassword@localhost:5432/postgres"
+session_id = "1"
+db = PostgresChatMessageHistory(session_id=session_id, connection_string=pg_connection_string)
 memory = ConversationBufferMemory(return_messages=True, memory_key="chat_history")
+
 agent_executor = AgentExecutor(agent=agent_chain, tools=tools, verbose=True, memory=memory)
-print(agent_executor.invoke({"input": "What is temperature of Bangalore?"}))
-print(agent_executor.invoke({"input": "What is temperature of Moscow?"}))
-print(agent_executor.invoke({"input": "What is latitude and longitude of Moscow?"}))
-print(agent_executor.invoke({"input": "Hi, I am Aritra"}))
-print(agent_executor.invoke({"input": "Hi, Who am I?"}))
+
+res1 = agent_executor.invoke({"input": "What is temperature of Bangalore?"})
+db.add_user_message(res1['input'])
+db.add_ai_message(res1['output'])
+db.add_user_message(agent_executor.invoke({"input": "What is latitude and longitude of Moscow?"})['input'])
+db.add_ai_message(agent_executor.invoke({"input": "What is latitude and longitude of Moscow?"})['output'])
+db.add_user_message(agent_executor.invoke({"input": "What is temperature of Moscow?"})['input'])
+db.add_ai_message(agent_executor.invoke({"input": "What is temperature of Moscow?"})['output'])
+db.add_user_message(agent_executor.invoke({"input": "Hi, My name is Aritra"})['input'])
+db.add_ai_message(agent_executor.invoke({"input": "Hi, My name is Aritra"})['output'])
+db.add_user_message(agent_executor.invoke({"input": "What is my name?"})['input'])
+db.add_ai_message(agent_executor.invoke({"input": "What is my name?"})['output'])
+
+
+def get_message_history():
+    return PostgresChatMessageHistory(session_id=session_id, connection_string=pg_connection_string)
+
+
+print(get_message_history())
