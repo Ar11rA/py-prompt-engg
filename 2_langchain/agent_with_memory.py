@@ -15,9 +15,7 @@ from langchain.tools.render import format_tool_to_openai_function
 from langchain_openai import ChatOpenAI
 from pydantic import BaseModel, Field
 
-from vars import API_KEY
-
-openai.api_key = API_KEY
+openai.api_key = "API_KEY"
 
 
 # Define the input schema

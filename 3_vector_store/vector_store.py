@@ -5,7 +5,7 @@ from langchain_core.messages import SystemMessage, HumanMessage
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 
-loader = TextLoader('resources/info.txt', encoding='utf-8')
+loader = TextLoader('../resources/info.txt', encoding='utf-8')
 documents = loader.load()
 print(len(documents))
 

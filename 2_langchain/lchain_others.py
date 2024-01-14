@@ -5,9 +5,7 @@ from langchain.schema.output_parser import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 
-from vars import API_KEY
-
-openai.api_key = API_KEY
+openai.api_key = "API_KEY"
 
 prompt = ChatPromptTemplate.from_template(
     "Tell me a short joke about {topic}"

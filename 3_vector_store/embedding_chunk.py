@@ -1,12 +1,6 @@
 from openai import OpenAI
 
-from vars import API_KEY, ORGANIZATION_ID
-
-client = OpenAI(
-    organization=ORGANIZATION_ID,
-    api_key=API_KEY
-)
-
+client = OpenAI()
 
 def get_embedding(text, model="text-embedding-ada-002"):
     res = client.embeddings.create(model=model, input=text)
@@ -28,7 +22,7 @@ def read_and_overlap_chunks(file_path, chunk_size=10, overlap=5):
     return chunks
 
 
-file_path = 'resources/info.txt'
+file_path = '../resources/info.txt'
 chunk_size = 30
 overlap = 3
 

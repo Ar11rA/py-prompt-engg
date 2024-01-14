@@ -2,11 +2,7 @@ import asyncio
 
 from openai import AsyncOpenAI
 
-from vars import API_KEY
-
-client = AsyncOpenAI(
-    api_key=API_KEY
-)
+client = AsyncOpenAI()
 
 
 async def main():

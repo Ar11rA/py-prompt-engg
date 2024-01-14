@@ -5,9 +5,7 @@ from langchain.utils.openai_functions import convert_pydantic_to_openai_function
 from langchain_openai import ChatOpenAI
 from pydantic import BaseModel, Field
 
-from vars import API_KEY
-
-openai.api_key = API_KEY
+openai.api_key = "API_KEY"
 
 # without explicit formatting
 model = ChatOpenAI()

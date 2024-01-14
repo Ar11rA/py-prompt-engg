@@ -1,11 +1,6 @@
 from openai import OpenAI
 
-from vars import API_KEY, ORGANIZATION_ID
-
-client = OpenAI(
-    organization=ORGANIZATION_ID,
-    api_key=API_KEY
-)
+client = OpenAI()
 
 stream = client.chat.completions.create(
     model="gpt-4",

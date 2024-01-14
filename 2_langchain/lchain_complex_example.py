@@ -6,9 +6,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 from langchain_openai import OpenAIEmbeddings
 
-from vars import API_KEY
-
-openai.api_key = API_KEY
+openai.api_key = "API_KEY"
 
 model = ChatOpenAI()
 output_parser = StrOutputParser()

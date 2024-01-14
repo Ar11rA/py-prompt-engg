@@ -3,12 +3,8 @@ import tiktoken
 
 from openai import OpenAI
 from sklearn.metrics.pairwise import cosine_similarity
-from vars import API_KEY, ORGANIZATION_ID
 
-client = OpenAI(
-    organization=ORGANIZATION_ID,
-    api_key=API_KEY
-)
+client = OpenAI()
 
 
 def get_embedding(text, model="text-embedding-ada-002"):

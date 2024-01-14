@@ -2,11 +2,7 @@ import json
 
 from openai import OpenAI
 
-from vars import API_KEY
-
-client = OpenAI(
-    api_key=API_KEY
-)
+client = OpenAI()
 
 # string to json example
 response = client.chat.completions.create(

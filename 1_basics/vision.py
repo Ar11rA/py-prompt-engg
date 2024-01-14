@@ -2,12 +2,7 @@
 from langchain_core.prompts import ChatPromptTemplate
 from openai import OpenAI
 
-from vars import API_KEY, ORGANIZATION_ID
-
-client = OpenAI(
-    organization=ORGANIZATION_ID,
-    api_key=API_KEY
-)
+client = OpenAI()
 
 response = client.chat.completions.create(
     model="gpt-4-vision-preview",
