@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "prompt-please"
 version = "0.1.0"
-description = ""
+description = "Prompt Engineering Ramp up"
 authors = ["Aritra Ghosh <aritra119.26@gmail.com>"]
 readme = "README.md"
 packages = [{ include = "prompt_please" }]
@@ -20,6 +20,8 @@ bs4 = "^0.0.1"
 psycopg = "^3.1.17"
 pgvector = "^0.2.4"
 psycopg2-binary = "^2.9.9"
+flask = "^3.0.0"
+flask-requests = "^0.0.14"
 
 
 [build-system]
