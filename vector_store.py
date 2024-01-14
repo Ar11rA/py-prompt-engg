@@ -1,3 +1,4 @@
+from langchain.prompts import ChatPromptTemplate
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores.pgvector import PGVector
 from langchain_community.document_loaders import TextLoader
@@ -31,6 +32,15 @@ db = PGVector.from_documents(
 
 content = db.similarity_search("What are fields in computer science?", k=10)
 model = ChatOpenAI(temperature=0)
+prompt = ChatPromptTemplate.from_messages([
+    ("system", """
+        You are a professor in computer science.
+        {context}
+    """),
+    ("user", "{input}"),
+])
+
+print('**************************************')
 print(model.invoke(
     [
         SystemMessage(
@@ -50,3 +60,19 @@ print(model.invoke(
         )
     ]
 ))
+
+print('**************************************')
+message = {
+    "context": ','.join([c.page_content for c in content]),
+    "input": """
+        What are fields in computer science? 
+        Can you mention them in a list? 
+        Do not give any other text.
+    """
+}
+print(prompt.invoke(message))
+
+chain = prompt | model
+
+print('**************************************')
+print(chain.invoke(message))
