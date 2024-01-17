@@ -23,6 +23,7 @@ psycopg2-binary = "^2.9.9"
 flask = "^3.0.0"
 flask-requests = "^0.0.14"
 pypdf = "^3.17.4"
+guardrails-ai = "^0.3.2"
 
 
 [build-system]

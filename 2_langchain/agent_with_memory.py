@@ -1,7 +1,6 @@
 import datetime
 from typing import Dict
 
-import openai
 import requests
 from langchain.agents import AgentExecutor
 from langchain.agents import tool
@@ -15,7 +14,6 @@ from langchain.tools.render import format_tool_to_openai_function
 from langchain_openai import ChatOpenAI
 from pydantic import BaseModel, Field
 
-openai.api_key = "API_KEY"
 
 
 # Define the input schema

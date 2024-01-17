@@ -52,7 +52,6 @@ import openai
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage, SystemMessage
 
-openai.api_key = API_KEY
 chat = ChatOpenAI(model="gpt-4-vision-preview", max_tokens=800)
 res = chat.invoke(
     [

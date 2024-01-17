@@ -11,7 +11,6 @@ from langchain_core.runnables import RunnableLambda
 from langchain_openai import ChatOpenAI
 from pydantic import BaseModel, Field
 
-openai.api_key = "API_KEY"
 
 loader = WebBaseLoader("https://lilianweng.github.io/posts/2023-06-23-agent/")
 documents = loader.load()

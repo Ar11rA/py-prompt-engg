@@ -13,7 +13,6 @@ from langchain.utils.openai_functions import convert_pydantic_to_openai_function
 from langchain_openai import ChatOpenAI
 from pydantic import BaseModel, Field
 
-openai.api_key = "API_KEY"
 
 
 @tool
