@@ -1,0 +1,3 @@
+import os
+
+PG_CONNECTION_STRING = os.getenv("PG_CONNECTION_STRING")
