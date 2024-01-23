@@ -67,4 +67,5 @@ def get_location_summary(query: str) -> str:
     })
 
     # save response to chat history
+    # check if we can store and update chat summary in the user-chats table
     return res['output']

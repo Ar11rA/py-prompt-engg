@@ -7,7 +7,7 @@ readme = "README.md"
 packages = [{ include = "prompt_please" }]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.11,<3.12"
 openai = "^1.7.0"
 python-docx = "^1.1.0"
 tiktoken = "^0.5.2"
@@ -24,7 +24,13 @@ flask = "^3.0.0"
 flask-requests = "^0.0.14"
 pypdf = "^3.17.4"
 guardrails-ai = "^0.3.2"
-
+pillow = "^10.2.0"
+sentence-transformers = "^2.2.2"
+pandas = "^2.2.0"
+nltk = "^3.8.1"
+emoji = "^2.10.0"
+matplotlib = "^3.8.2"
+tensorflow-macos = "^2.15.0"
 
 [build-system]
 requires = ["poetry-core"]

@@ -1,10 +1,8 @@
-import openai
+from langchain.output_parsers import PydanticOutputParser
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema.output_parser import StrOutputParser
-from langchain.utils.openai_functions import convert_pydantic_to_openai_function
 from langchain_openai import ChatOpenAI
 from pydantic import BaseModel, Field
-
 
 # without explicit formatting
 model = ChatOpenAI()
@@ -15,7 +13,7 @@ prompt = ChatPromptTemplate.from_template(
     Tell me the hex code for the input color: {color} 
     Also, let me know of a good description for the color. 
     Include usage in a sentence in the description.
-    """
+    """,
 )
 
 chain = prompt | model | output_parser
@@ -31,7 +29,18 @@ class ColorDetails(BaseModel):
     description: str = Field(description="The color description and usage")
 
 
-color_function = convert_pydantic_to_openai_function(ColorDetails)
-model_with_fn = ChatOpenAI().bind(functions=[color_function])
-chain = prompt | model_with_fn
-print(chain.invoke({"color": "cyan"}))
+output_parser = PydanticOutputParser(pydantic_object=ColorDetails)
+
+prompt = ChatPromptTemplate.from_template(
+    """ 
+    Tell me the hex code for the input color: {color} 
+    {instructions}
+    """,
+)
+
+# color_function = convert_pydantic_to_openai_function(ColorDetails)
+model_with_fn = ChatOpenAI()
+print(output_parser.get_format_instructions())
+chain = prompt | model_with_fn | output_parser
+res = chain.invoke({"color": "cyan", "instructions": output_parser.get_format_instructions()})
+print(type(res))

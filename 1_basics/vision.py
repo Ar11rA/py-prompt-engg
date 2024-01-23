@@ -19,7 +19,7 @@ response = client.chat.completions.create(
         {
             "role": "user",
             "content": [
-                {"type": "text", "text": "There are 2 charts below. What can we make of them?"},
+                {"type": "text", "text": "There are 3 charts below. What can we make of them?"},
                 {
                     "type": "image_url",
                     "image_url": {
