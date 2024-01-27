@@ -2,6 +2,8 @@
 
 ## Overview
 
+![Genai overview](./resources/genai.png)
+
 To build applications around GenAI, these are the 4 main building blocks:
 
 1. Prompt Engineering
@@ -47,7 +49,7 @@ python app.py
 ├── 2_langchain - Understand this library to work with a wide range of LLMs and community packages. 
 ├── 3_vector_store - Work with vector databases and understand what embeddings are.
 ├── 4_server - Collate the learnings from above 3 into a structured framework and expose it via an API interface.
-├── 5_llm_foundations - Understand in detail about LLMs and NLP.
+├── 5_llm_foundations -stand in detail about LLMs and NLP.
 └── resources - Common files used for reading/parsing etc
 ```
 
