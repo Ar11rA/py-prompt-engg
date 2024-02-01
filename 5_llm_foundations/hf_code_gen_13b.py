@@ -1,8 +1,8 @@
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 # Load the tokenizer and model
-tokenizer = AutoTokenizer.from_pretrained("Salesforce/codegen-350M-mono")
-model = AutoModelForCausalLM.from_pretrained("Salesforce/codegen-350M-mono")
+tokenizer = AutoTokenizer.from_pretrained("codellama/CodeLlama-13b-hf")
+model = AutoModelForCausalLM.from_pretrained("codellama/CodeLlama-13b-hf")
 
 # Define a code-related prompt
 prompt = "Write a Python function to add two numbers:"
